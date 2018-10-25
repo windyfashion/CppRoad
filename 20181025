@@ -1,0 +1,17 @@
+/*指向常量的指针，不能用于改变其所指对象的值。常量只能用指向常量的指针；而指向常量的指针可以指向非常量*/
+
+/*函数体内定义的变量一般来说并非存放在固定地址当中，因此constexptr指针不能指向这样的变量。相反的，定义于所有函数体之外的对象，其地址固定不变，能用来
+初始化constexptr指针。另外允许函数定义一类有效范围超过自身的变量，这类变量也有固定地址，因此可被constexptr绑定。*/
+
+/*constexptr仅对指针有效（若用constexptr声明并定义了一个指针），与指针所指对象无关
+    const int *p=nullptr; //底层const
+    constexptr int *p = nullptr; //顶层const；
+*/
+
+/*typedef char * pstring;
+  const pstring cstr=0;  //cstr是指向char的常量指针
+  const pstring *ps;  //ps是一个指针 它的对象是指向char的常量指针
+  const char *cstr=0;  //cstr是指向const char 的指针
+  const 是对给定类型的修饰
+  前者 const pstring cstr=0;可意为 const (char *) csptr;
+  后者 const char *cstr=0; 可意为 (const char ) * csptr;
