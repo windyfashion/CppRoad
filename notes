@@ -15,3 +15,20 @@
   const 是对给定类型的修饰
   前者 const pstring cstr=0;可意为 const (char *) csptr;
   后者 const char *cstr=0; 可意为 (const char ) * csptr;
+*/
+
+/*使用auto声明多个变量时，所有变量的初始基本类型都必须一样*/
+
+/*auto一般会忽略顶层const,但设置一个类型为auto的引用时，初始值中的顶层const仍然保留*/
+
+/***********************deltype类型指示符*************************/
+decltype 作用是选择并返回操作数的数据类型。在此过程中，编译器分析表达式并得到它的类型，却不实际计算表达式的值
+
+decltype 处理顶层const时，如果decltype使用的表达式是一个变量，则返回该变量的类型（包括顶层const和引用在内）
+
+decltype处理的表达式内容是解引用操作，则decltype的结果类型与表达式形式密切相关。
+
+decltype所用表达式，如果变量名加上了一对括号的变量名，这样的decltype就会得到引用类型
+int i=42;
+decltype((i)) d;  //错误：d是int&,必须初始化
+decltype(i) e;  //正确：e是一个（未初始化的）int
