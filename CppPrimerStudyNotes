@@ -351,5 +351,29 @@ set迭代器是const的
 shared_ptr<int> p1= new int(1024); //错误：必须使用直接初始化形式
 shared_ptr<int> p2(new int (1024)); //正确：使用了直接初始化的形式
 
-/*
+/*使用自己的释放操作：shared_ptr<T> p(&t,删除器); */
+
+/*一个unique_ptr拥有它所指向的对象。因此unique_ptr不支持普通的拷贝和赋值操作
+
+/*当我们定义一个unique_ptr时，需要将其绑定到一个new返回的指针上。初始化unique_ptr时必须采用直接初始化
+
+/*release返回的指针通常被用来初始化另一个智能指针或给另一个智能指针赋值，如果我们不用另一个智能指针来保存release返回的指针，我们的程序就要负责资源
+的释放
+
+/*不能拷贝uniquqe_ptr的规则有一个例外：我们可以拷贝或赋值一个将要被销毁的unique_ptr 最常见的例子时从函数返回一个Unique_ptr
+
+/*与重载关联容器的比较操作类似，我们必须在尖括号中unique_ptr指向的类型之后提供删除器类型。在创建或者reset一个这种unique_ptr时必须提供一个指定类型
+的可调用对象（删除器）
+unique_ptr<objT,delT> p(new objT,fcn);
+
+/*weak_ptr是一种不控制所指向对象生存期的只能指针，它指向由一个shared_ptr管理的对象。将一个weak_ptr绑定到一个shared_ptr不会改变shared_ptr的引用
+计数。一旦最后一个指向对象的shared_ptr被销毁，对象就会被释放。即使weak_ptr指向对象，对象也还是会被释放。
+
+/*allocator分配未构造的内存
+
+/*为了使用allocate返回的内存，我们必须用construct构造对象。使用未构造的内存，其行为是未定义的。
+
+/*当我们用完对象后，必须对每个构造的元素调用destroy来销毁它们。函数destroy接受一个指针，对指向的对象执行析构函数
+
+/*我们传递给deallocate的大小参数必须与调用allocated分配内存时提供的大小参数具有一样的值
 
