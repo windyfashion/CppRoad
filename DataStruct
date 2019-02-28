@@ -74,3 +74,62 @@ float evaluate(char* s,char &RPN){
     }
     return opnd.pop();  //返回最终结果
 }
+
+逆波兰表达式（后缀表达式）
+
+求值算法
+rpnEvaluation(expr){
+    //输入RPN表达式expr（假定正确 ）
+    //输出表达式求值结果
+    引入栈，用以保存操作数
+    while（表达式未扫描完毕）
+    {
+        从expr中读入下一元素X；
+        if(x是操作数）
+            入栈；
+        else{//是运算符
+            从栈中弹出运算符所需要的操作数的个数
+            进行运算并入栈
+        }
+        }
+    返回栈顶（也就是最终运算结果）；
+    }
+    
+    
+/***********************************************利用回溯算法求八皇后问题**************************************************/
+
+struct Queen{
+    int x,y;
+    Queen(int xx=0,yy=0):x(xx),y(yy){}
+    
+    bool operator ==(Queen const& q){
+        return(x==q.x)||(y==q.y)||(x+y==q.x+q.y)||(x-y==q.x-q.y);
+    }
+    bool operator !=(Queen const& q){
+        return !(*this==q);
+    }
+}
+//将同行同列同一对角线视为相等
+
+void placeQueen(int n){ //n皇后
+    Stack<Queen> solution;
+    Queen q(0,0);
+    do{
+        if(N<=solution.size()||N<=q.y) { //若已出界回溯上一行
+            q=solution.pop();
+            q.y++;
+        }
+        else{
+            while((q.y<N)&&(0<=solution.find(q)){
+                q.y++;
+            }
+            if(q.y<N){
+                solution.push(q);
+                if(N<=solution.size())
+                    nSolution++;
+                q.x++;
+                q.y=0;
+            }
+        }
+    }while((0<q.x)||(q.y<N));
+}
