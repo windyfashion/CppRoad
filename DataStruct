@@ -115,17 +115,17 @@ void placeQueen(int n){ //n皇后
     Stack<Queen> solution;
     Queen q(0,0);
     do{
-        if(N<=solution.size()||N<=q.y) { //若已出界回溯上一行
+        if(solution.size()>=N||q.y>=N) { //若已出界回溯上一行
             q=solution.pop();
             q.y++;
         }
         else{
-            while((q.y<N)&&(0<=solution.find(q)){
+            while((q.y<N)&&(solution.find(q)>=0){
                 q.y++;
             }
             if(q.y<N){
                 solution.push(q);
-                if(N<=solution.size())
+                if(solution.size()>=N)
                     nSolution++;
                 q.x++;
                 q.y=0;
